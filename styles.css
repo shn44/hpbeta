@@ -71,3 +71,14 @@ button:hover {
 .dialog button.cancel {
     background-color: #FF0000;
 }
+img {
+    padding-left: 47%;
+    width: 111px;
+    height: 111px;
+}
+p {
+    color: white;
+    padding-left: 43%;
+    padding-right: auto;
+    margin-bottom: 77px;
+}
