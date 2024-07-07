@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Estoque</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestor de Estoque</h2>
+        <input type="text" id="nomeProduto" placeholder="Nome do Produto">
+        <input type="number" id="valorProduto" placeholder="Valor">
+        <input type="number" id="quantidadeProduto" placeholder="Quantidade">
+        <br>
+        <button onclick="adicionarProduto()">Adicionar Produto</button>
+        <button onclick="calcularTotal()">Total Agregado</button>
+        <button onclick="abrirDialogo()">Registrar Venda</button>
+        <p id="resultado" style="color: grey;"></p>
+        <div class="product-list" id="listaProdutos">
+            <!-- Lista de Produtos será preenchida dinamicamente -->
+        </div>
+
+        <h2>Registro de Vendas</h2>
+        <div id="registroVendas" class="sales-list">
+            <!-- Lista de vendas será preenchida dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Diálogo para Registrar Venda -->
+    <div id="dialogo" class="dialog">
+        <p>Selecione o produto e quantidade vendida:</p>
+        <select id="selectProduto">
+            <!-- Options serão preenchidos dinamicamente -->
+        </select>
+        <input type="number" id="quantidadeVendida" placeholder="Quantidade Vendida">
+        <button onclick="registrarVenda()">Registrar Venda</button>
+        <button class="cancel" onclick="fecharDialogo()">Cancelar</button>
+    </div>
+
+    <!-- Diálogo para Remover Produto -->
+    <div id="dialogoRemoverProduto" class="dialog">
+        <p>Você deseja remover este produto?</p>
+        <button onclick="confirmarRemocaoProduto()">Sim</button>
+        <button class="cancel" onclick="fecharDialogoRemoverProduto()">Cancelar</button>
+    </div>
+
+    <!-- Diálogo para Remover Venda -->
+    <div id="dialogoRemoverVenda" class="dialog">
+        <p>Você deseja remover esta venda?</p>
+        <button onclick="confirmarRemocaoVenda()">Sim</button>
+        <button class="cancel" onclick="fecharDialogoRemoverVenda()">Cancelar</button>
+    </div>
+
+    <!-- Diálogo para Editar Venda -->
+    <div id="dialogoEditarVenda" class="dialog">
+        <p>Editar quantidade da venda:</p>
+        <input type="number" id="novaQuantidadeVenda" placeholder="Nova Quantidade">
+        <button onclick="editarVenda()">Salvar</button>
+        <button class="cancel" onclick="fecharDialogoEditarVenda()">Cancelar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
