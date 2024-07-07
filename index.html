@@ -10,13 +10,14 @@
     <div class="container">
         <h2>Gestor de Estoque</h2>
         <input type="text" id="nomeProduto" placeholder="Nome do Produto">
-        <input type="number" id="valorProduto" placeholder="Valor">
+        <input type="number" id="valorProduto" placeholder="Valor de Compra">
+        <input type="number" id="valorVenda" placeholder="Valor de Venda">
         <input type="number" id="quantidadeProduto" placeholder="Quantidade">
         <br>
         <button onclick="adicionarProduto()">Adicionar Produto</button>
         <button onclick="calcularTotal()">Total Agregado</button>
         <button onclick="abrirDialogo()">Registrar Venda</button>
-        <p id="resultado" style="color: grey;"></p>
+        <p id="resultado" class="resultado"></p>
         <div class="product-list" id="listaProdutos">
             <!-- Lista de Produtos será preenchida dinamicamente -->
         </div>
@@ -59,10 +60,7 @@
         <button onclick="editarVenda()">Salvar</button>
         <button class="cancel" onclick="fecharDialogoEditarVenda()">Cancelar</button>
     </div>
-    <img src="https://i.gifer.com/origin/ba/ba5db81c6038c9bdb9a163567791bc8f_w200.gif" alt="PQ N COLOCAR O ELLIOT FUMANDO?">
-    <footer>
-        <p> =- CRIADO POR sHn -=</p>
-    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
