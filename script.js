@@ -162,7 +162,8 @@ function registrarVenda() {
 
 function exibirVendas() {
     let registroVendas = document.getElementById('registroVendas');
-    registroVendas.innerHTML = '';
+    registroVendas.innerHTML = ''; // Limpa o conteúdo atual da lista de vendas
+
     vendas.forEach(venda => {
         let item = document.createElement('div');
         item.classList.add('sale-item');
