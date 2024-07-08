@@ -36,10 +36,9 @@ function salvarVendas() {
 function adicionarProduto() {
     let nome = document.getElementById('nomeProduto').value;
     let valor = parseFloat(document.getElementById('valorProduto').value);
-    let valorVenda = parseFloat(document.getElementById('valorVenda').value);
     let quantidade = parseInt(document.getElementById('quantidadeProduto').value);
 
-    if (nome && !isNaN(valor) && !isNaN(valorVenda) && !isNaN(quantidade)) {
+    if (nome && !isNaN(valor) && !isNaN(quantidade)) {
         // Verifica se o produto já existe na lista
         let produtoExistente = produtos.find(p => p.nome === nome);
         if (produtoExistente) {
@@ -50,7 +49,7 @@ function adicionarProduto() {
         } else {
             // Se não existir, adiciona um novo produto
             let id = produtos.length + 1; // Gera um ID simples para o produto
-            produtos.push({ id, nome, valor, valorVenda, quantidade });
+            produtos.push({ id, nome, valor, quantidade });
             document.getElementById('resultado').innerText = 'Produto adicionado com sucesso!';
             document.getElementById('resultado').style.color = '#008000';
         }
@@ -59,7 +58,6 @@ function adicionarProduto() {
         exibirProdutos();
         document.getElementById('nomeProduto').value = '';
         document.getElementById('valorProduto').value = '';
-        document.getElementById('valorVenda').value = '';
         document.getElementById('quantidadeProduto').value = '';
     } else {
         document.getElementById('resultado').innerText = 'Por favor, preencha todos os campos CORRETAMENTE.';
@@ -74,7 +72,7 @@ function exibirProdutos() {
         let item = document.createElement('div');
         item.classList.add('product-item');
         item.innerHTML = `
-            <span>${produto.nome}: R$${produto.valor.toFixed(2)} x ${produto.quantidade}</span>
+            <span>${produto.nome}: R$${produto.valor.toFixed(2)} | ${produto.quantidade}X</span>
             <div>
                 <button class="edit-btn" onclick="editarProduto(${produto.id})">Editar</button>
                 <button onclick="abrirDialogoRemoverProduto(${produto.id})">Remover</button>
@@ -99,7 +97,6 @@ function editarProduto(id) {
     if (produto) {
         document.getElementById('nomeProduto').value = produto.nome;
         document.getElementById('valorProduto').value = produto.valor.toFixed(2);
-        document.getElementById('valorVenda').value = produto.valorVenda.toFixed(2);
         document.getElementById('quantidadeProduto').value = produto.quantidade;
         produtos = produtos.filter(p => p.id !== id); // Remove o produto da lista temporária
         salvarProdutos();
@@ -134,13 +131,12 @@ function fecharDialogo() {
 function registrarVenda() {
     let produtoNome = document.getElementById('selectProduto').value;
     let quantidade = parseInt(document.getElementById('quantidadeVendida').value);
-
+    
     if (produtoNome && !isNaN(quantidade)) {
         let produto = produtos.find(p => p.nome === produtoNome);
         if (produto && produto.quantidade >= quantidade) {
             let id = vendas.length + 1; // Gera um ID simples para a venda
-            let valorVenda = produto.valorVenda * quantidade;
-            vendas.push({ id, nome: produtoNome, quantidade, valorVenda });
+            vendas.push({ id, nome: produtoNome, quantidade });
 
             produto.quantidade -= quantidade;
             if (produto.quantidade === 0) {
@@ -162,13 +158,12 @@ function registrarVenda() {
 
 function exibirVendas() {
     let registroVendas = document.getElementById('registroVendas');
-    registroVendas.innerHTML = ''; // Limpa o conteúdo atual da lista de vendas
-
+    registroVendas.innerHTML = '';
     vendas.forEach(venda => {
         let item = document.createElement('div');
         item.classList.add('sale-item');
         item.innerHTML = `
-            <span>${venda.nome} - Quantidade: ${venda.quantidade} - Valor de Venda: R$${venda.valorVenda.toFixed(2)}</span>
+            <span>${venda.nome} - Quantidade: ${venda.quantidade}</span>
             <div>
                 <button class="edit-btn" onclick="abrirDialogoEditarVenda(${venda.id})">Editar</button>
                 <button onclick="abrirDialogoRemoverVenda(${venda.id})">Remover</button>
@@ -198,7 +193,6 @@ function editarVenda() {
             if (produto.quantidade >= diferenca) {
                 produto.quantidade -= diferenca;
                 venda.quantidade = novaQuantidade;
-                venda.valorVenda = produto.valorVenda * novaQuantidade;
 
                 if (produto.quantidade === 0) {
                     produtos = produtos.filter(p => p.id !== produto.id);
@@ -250,8 +244,6 @@ function confirmarRemocaoVenda() {
 
 function calcularTotal() {
     let total = produtos.reduce((acc, produto) => acc + (produto.valor * produto.quantidade), 0);
-    let totalVenda = vendas.reduce((acc, venda) => acc + venda.valorVenda, 0);
-    let lucro = totalVenda - total;
-    document.getElementById('resultado').innerText = `Total Agregado: R$${total.toFixed(2)} | Lucro: R$${lucro.toFixed(2)}`;
+    document.getElementById('resultado').innerText = `Total Agregado: R$${total.toFixed(2)}`;
     document.getElementById('resultado').style.color = 'grey';
 }

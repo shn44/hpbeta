@@ -3,13 +3,13 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #0e121b 0%, #244174 100%);
     color: #fff;
-    overflow: hidden;
+    overflow-y: auto; /* Adiciona barra de rolagem vertical no body */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da viewport */
 }
 
 .container {
@@ -21,6 +21,7 @@ body {
     max-width: 600px;
     width: 100%;
     animation: fadeIn 1s ease-out;
+    margin: 20px; /* Adiciona margem para estética */
 }
 
 h2 {
@@ -36,10 +37,15 @@ input[type="text"], input[type="number"] {
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: rgba(255, 233, 233, 0.2);
+    color: #ffffff;
+    
 }
 
+::placeholder {
+    color: #312d2d;
+
+}
 button {
     padding: 10px 20px;          
     background-color: #ff6f61;
